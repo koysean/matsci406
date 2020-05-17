@@ -19,22 +19,33 @@ b = 2e3
 #b = 5
 
 def main():
+    ''' For testing purposes '''
     print(global_matrices(2, 2))
 
 def global_matrices(n_e, order=1):
+    ''' Generates global stiffness matrix and force vector. n_e is the number of
+    elements. Order determines the shape function (1 = linear, 2 = quadratic).'''
+    # Define local parameters and matrices
     l_e = length / n_e
     K_e = local_stiffness(l_e, order)
     f_e_b = local_body_force(l_e, order)
 
+    # Number of nodes in the mesh
     n_n = order * n_e + 1
 
+    # generate the elemental traction force vectors (zero for all elements
+    # except for the one at x=6)
     f_e_t = np.zeros((n_e, n_n))
     f_e_t[-1][-1] = area * t_l
 
+    # Initiate global matrices
     K_g = np.zeros((n_n, n_n))
     f_g = np.zeros((n_n))
 
     for e in range(n_e):
+        # For each element, the gather matrix is generated and then used to
+        # calculate the summation term for the global matrices associated with
+        # that element.
         L_e = gather_matrix(n_e, e, order)
         print(e, L_e)
         np.matmul(np.transpose(L_e), f_e_b)
@@ -53,6 +64,8 @@ def gather_matrix(n_e, e, order=1):
     return L_e
 
 def local_stiffness(l_e, order=1):
+    ''' Returns the appropriate local stiffness matrix given the element length
+    and order '''
     if order == 1:
         return area * modulus / l_e * np.array([[1, -1], [-1, 1]])
     elif order == 2:
@@ -60,6 +73,8 @@ def local_stiffness(l_e, order=1):
             [7, -8, 1], [-8, 16, -8], [1, -8, 7] ])
 
 def local_body_force(l_e, order=1):
+    ''' Returns the appropriate local body force vectors given the element
+    length and order '''
     if order == 1:
         return b * l_e / 2 * np.array([1, 1])
     elif order==2:
