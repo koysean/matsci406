@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{enumerate}
+\usepackage{caption}
 
 %opening
 \title{Matsci 406 A2}
@@ -42,4 +43,38 @@ Find $u(x)$ among smooth functions satisfying $u(0)=0$ such that
 \begin{align}
 	\int_{0}^{6}\frac{dw}{dx}AE\,\frac{du}{dx}dx=w(x\!=\!6)\,At_\ell+\int_{0}^{6}wb\,dx\qquad\forall w~\text{with}~w(0)=0
 \end{align}
+\newpage
+\section{}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{1st_order_plot.png}
+	\captionsetup{format=hang}
+	\caption{Displacement and Stress calculated using linear shape functions compared to the exact solution.}
+	\label{fig:1plot}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{1st_order_diffplot.png}
+	\captionsetup{format=hang}
+	\caption{Difference between the FEM and analytical displacement and stress using linear shape functions.}
+	\label{fig:1diffplot}
+\end{figure}
+When using linear shape functions for the FEM model, we can see that there are huge differences to the exact solutions, particularly for the stress. If we were to repeat the calculations using more elements, one would expect the displacements to converge towards the analytical curve. In order for the stresses to do the same, the number of elements would have to be very large, but they would approach the exact curve eventually.
+\newpage
+\section{}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{2nd_order_plot.png}
+	\captionsetup{format=hang}
+	\caption{Displacement and Stress calculated using quadratic shape functions compared to the exact solution.}
+	\label{fig:2plot}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\linewidth]{2nd_order_diffplot.png}
+	\captionsetup{format=hang}
+	\caption{Difference between the FEM and analytical displacement and stress using quadratic shape functions.}
+	\label{fig:2diffplot}
+\end{figure}
+For quadratic shape functions, we can see that the result is much better, even if only two elements are used. The differences between the analytical and the FEM result are so small (note the scale of the y-axis in figure \ref{fig:2diffplot}) that it seems impractical to employ higher-order shape functions - the result would likely not improve much.
 \end{document}
