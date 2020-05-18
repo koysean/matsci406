@@ -3,7 +3,6 @@
 \usepackage[nohead, nomarginpar, margin=1in, foot=.25in]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage{enumerate}
 \usepackage{caption}
 
 %opening
@@ -43,7 +42,7 @@ Find $u(x)$ among smooth functions satisfying $u(0)=0$ such that
 \begin{align}
 	\int_{0}^{6}\frac{dw}{dx}AE\,\frac{du}{dx}dx=w(x\!=\!6)\,At_\ell+\int_{0}^{6}wb\,dx\qquad\forall w~\text{with}~w(0)=0
 \end{align}
-\newpage
+\vspace{120pt}
 \section{}
 \begin{figure}[h!]
 	\centering
@@ -59,7 +58,7 @@ Find $u(x)$ among smooth functions satisfying $u(0)=0$ such that
 	\caption{Difference between the FEM and analytical displacement and stress using linear shape functions.}
 	\label{fig:1diffplot}
 \end{figure}
-When using linear shape functions for the FEM model, we can see that there are huge differences to the exact solutions, particularly for the stress. If we were to repeat the calculations using more elements, one would expect the displacements to converge towards the analytical curve. In order for the stresses to do the same, the number of elements would have to be very large, but they would approach the exact curve eventually.
+When using linear shape functions for the FEM model, we can see that there are huge differences to the exact solutions, particularly for the stress. If we were to repeat the calculations using more elements, one would expect the displacements to converge towards the analytical curve. We note that the FEM result for the displacements is exact at node points, and by increasing the number of nodes, we improve the result. In order for the stresses to do the same, the number of elements would have to be very large, but they would approach the exact curve eventually. In this case, the FEM result is exact in between the node points, and again, increasing the number of elements would improve the result, but since the deviation from the exact result is much greater away from these points, one would need many more elements to obtain an acceptable approximation of the exact values.
 \newpage
 \section{}
 \begin{figure}[h!]
@@ -76,5 +75,5 @@ When using linear shape functions for the FEM model, we can see that there are h
 	\caption{Difference between the FEM and analytical displacement and stress using quadratic shape functions.}
 	\label{fig:2diffplot}
 \end{figure}
-For quadratic shape functions, we can see that the result is much better, even if only two elements are used. The differences between the analytical and the FEM result are so small (note the scale of the y-axis in figure \ref{fig:2diffplot}) that it seems impractical to employ higher-order shape functions - the result would likely not improve much.
+For quadratic shape functions, we can see that the result is much better, even if only two elements are used. The differences between the analytical and the FEM result are so small (note the scale of the y-axis in figure \ref{fig:2diffplot}) that it seems impractical to employ higher-order shape functions - the result would likely not improve much. More precisely, this second-order FEM result is exact to the numerical precision of the IEEE 754 double-precision floating point standard used in most python environments.
 \end{document}
