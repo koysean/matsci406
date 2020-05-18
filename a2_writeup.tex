@@ -15,7 +15,31 @@
 
 \section{}
 To derive the weak form for $u(x)$, we start with the strong form given in the problem:
-$$
-\frac{d}{dx}\left(AE\frac{du}{dx}\right)
-$$
+\begin{align}
+	&\frac{d}{dx}\left(AE\,\frac{du}{dx}\right)+b=0~~\text{on}~~0<x<6\label{governing}\\ 
+	&u(0)=0\,\text{m}\label{boundary}\\
+	&\sigma(6)=\left(E\,\frac{du}{dx}\right)_{x=6}=-4\times10^{6}\,\text{N/m}^{2}=t_\ell\label{neumann}\\
+\intertext{Multiply \eqref{governing} and \eqref{neumann} by $w(x)$, and integrate \eqref{governing} over the domain:}
+	&\int_{0}^{\ell}w\left[\frac{d}{dx}\left(AE\,\frac{du}{dx}\right)+b\right]dx=0\label{weigoverning}\\
+	&wA\left[\left(E\,\frac{du}{dx}\right)-t_\ell\right]_{x=6}=0\label{weineumann}\\
+\intertext{Next, we manipulate equation \eqref{weigoverning}. Letting $f=AE\,\frac{du}{dx}$, equation \eqref{weigoverning} becomes:}
+	&\int_{0}^{\ell}w\left(\frac{df}{dx}+b\right)dx=0\quad\text{, with}\\
+	&\begin{aligned}\int_{0}^{\ell}w\,\frac{df}{dx}dx&=wf\biggr\vert_0^\ell-\int_{0}^{\ell}f\,\frac{dw}{dx}dx\\
+	&=wAE\,\frac{du}{dx}\biggr\vert_0^\ell-\int_{0}^{\ell}\frac{dw}{dx}AE\,\frac{du}{dx}dx\end{aligned}\\[24pt]
+	\implies\quad&wAE\,\frac{du}{dx}\biggr\vert_0^\ell-\int_{0}^{\ell}\frac{dw}{dx}AE\,\frac{du}{dx}dx+\int_{0}^{\ell}wb\,dx=0
+\end{align}
+Since $\sigma=E\,\frac{du}{dx}$, we get
+\begin{align}
+	wA\sigma\vert_{x=\ell}-wA\sigma\vert_{x=0}-\int_{0}^{\ell}\frac{dw}{dx}AE\,\frac{du}{dx}dx+\int_{0}^{\ell}wb\,dx=0\label{fullint}
+\end{align}
+From equation \eqref{boundary}, it follows that $w(0)=0$, and the first term in \eqref{fullint} disappears:
+\begin{align}
+	&wA\sigma\vert_{x=0}-\int_{0}^{\ell}\frac{dw}{dx}AE\,\frac{du}{dx}dx+\int_{0}^{\ell}wb\,dx=0\\
+	\implies\quad&\int_{0}^{\ell}\frac{dw}{dx}AE\,\frac{du}{dx}dx=\left(wAt_\ell\right)+\int_{0}^{\ell}wb\,dx
+\end{align}
+Thus, we arrive at the statement of the weak form:\\[12pt]
+Find $u(x)$ among smooth functions satisfying $u(0)=0$ such that 
+\begin{align}
+	\int_{0}^{6}\frac{dw}{dx}AE\,\frac{du}{dx}dx=w(x\!=\!6)\,At_\ell+\int_{0}^{6}wb\,dx\qquad\forall w~\text{with}~w(0)=0
+\end{align}
 \end{document}
