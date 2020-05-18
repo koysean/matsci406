@@ -2,5 +2,44 @@ The elemental matrices and vectors for the quadratic shape function were found
 by adapting the derivation provided for the linear shape function. The element
 shape function matrices are given by
 \begin{align}
-    \bm{N^e} &= \frac{2}{(l^e)^e}
+    \bm{N^e} &= \frac{2}{(l^e)^2} \begin{pmatrix}
+        (x-x_2^e)(x-x_3^e) & -2(x-x_1^e)(x-x_3^e) & (x-x_1^e)(x-x_2^e)
+    \end{pmatrix} \\
+    \bm{B^e} &= \frac{2}{(l^e)^2} \begin{pmatrix}
+        2x-(x_2^e+x_3^e) & -4x+2(x_1^e+x_3^e) & 2x-(x_1^e+x_2^e)
+    \end{pmatrix}
 \end{align}
+Since each element contains three nodes, the stiffness matrix $\bm{K^e}$ will
+have dimensions $3\times3$; the gather matrices $\bm{L^e}$ will be
+$3\times(2n_e+1)$; and the force and displacement vectors will be $3\times1$.
+The gather matrix was deduced to give the following form, where for an element
+$e$, the first nonzero column is at column $(2e-1)$ (where $e=1$ is the first
+element):
+\begin{equation}
+    \bm{L^e} = 
+    \begin{pmatrix}
+        \ldots & 0 & 1 & 0 & 0 & 0 & \ldots \\
+        \ldots & 0 & 0 & 1 & 0 & 0 & \ldots \\
+        \ldots & 0 & 0 & 0 & 1 & 0 & \ldots
+    \end{pmatrix}
+\end{equation}
+To calculate the stiffness and body force matrices, the appropriate integrals,
+given in Lecture 3, were performed with $\bm{N^e}$ and $\bm{B^e}$ to give the
+following forms:
+\begin{align}
+    \bm{K^e} &= \frac{EA}{3l^e}
+    \begin{pmatrix}
+        7 & -8 & 1 \\
+        -8 & 16 & -8 \\
+        1 & -8 & 7
+    \end{pmatrix} \\
+    \bm{f^e_\Omega} &= \frac{bl^e}{6} \begin{pmatrix} 1 \\ 4 \\ 1 \end{pmatrix}
+\end{align}
+Finally, the traction force follows the same form as for the linear shape
+function, but now as a 3 dimensional vector; i.e. $f_\Gamma^e = \bm{0}\;\forall
+e(e\neq n_e)$, and the last element has the traction force:
+\begin{equation}
+    f_\Gamma^{n_e} = t_l A \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}
+\end{equation}
+The resulting calculations are shown in Figure~\ref{fig:2plot}.
+
