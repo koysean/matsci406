@@ -2,6 +2,7 @@
 
 \usepackage[nohead, nomarginpar, margin=1in, foot=.25in]{geometry}
 \usepackage{amsmath}
+\usepackage{bm}
 \usepackage{graphicx}
 \usepackage{caption}
 
@@ -61,6 +62,7 @@ Find $u(x)$ among smooth functions satisfying $u(0)=0$ such that
 When using linear shape functions for the FEM model, we can see that there are huge differences to the exact solutions, particularly for the stress. If we were to repeat the calculations using more elements, one would expect the displacements to converge towards the analytical curve. We note that the FEM result for the displacements is exact at node points, and by increasing the number of nodes, we improve the result. In order for the stresses to do the same, the number of elements would have to be very large, but they would approach the exact curve eventually. In this case, the FEM result is exact in between the node points, and again, increasing the number of elements would improve the result, but since the deviation from the exact result is much greater away from these points, one would need many more elements to obtain an acceptable approximation of the exact values.
 \newpage
 \section{}
+\input{quadratic_shapefunc_deriv}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\linewidth]{2nd_order_plot.png}
